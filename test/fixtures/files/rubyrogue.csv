@@ -1,0 +1,31 @@
+#,Status,Project,Tracker,Priority,Subject,Assigned to,Category,Target version,Author,Start,Due date,% Done,Estimated time,Created,Updated,Resolution,Description
+274,New,rubyrogue,Feature,Normal,ranged attack: do not allow to target invisible square,Laurynas Liutkus,"","",Laurynas Liutkus,07/30/2008,"",0,"",07/30/2008 11:35 PM,07/30/2008 11:35 PM,"",-
+273,Closed,rubyrogue,Feature,Normal,ranged attack: use real range instead of hardcoded 4,Laurynas Liutkus,"","",Laurynas Liutkus,07/30/2008,"",100,"",07/30/2008 11:34 PM,07/30/2008 11:44 PM,"",-
+262,Closed,rubyrogue,Feature,Normal,ranged attack should train ranged weapon skill,Laurynas Liutkus,"","",Laurynas Liutkus,07/29/2008,"",100,"",07/29/2008 10:32 PM,07/30/2008 11:33 PM,"",-
+261,New,rubyrogue,Feature,Normal,missile should drop at target location when launched,Laurynas Liutkus,"","",Laurynas Liutkus,07/29/2008,"",0,"",07/29/2008 10:31 PM,07/29/2008 10:31 PM,"",it should not depend on whether it hits target or misses
+259,Closed,rubyrogue,Feature,Normal,find nearest monster method,Laurynas Liutkus,"","",Anonymous,07/29/2008,"",100,"",07/29/2008 09:49 PM,07/31/2008 12:13 AM,"",associated issue: #185
+216,New,rubyrogue,Feature,Normal,player should die when it's hitpoints reaches zero,Laurynas Liutkus,"","",Laurynas Liutkus,"","",0,"",07/15/2008 10:23 PM,07/24/2008 06:28 PM,"",player death ends game
+194,New,rubyrogue,Feature,Normal,add fatigue attribute,Laurynas Liutkus,"","",Laurynas Liutkus,"","",0,"",07/13/2008 11:34 PM,07/13/2008 11:34 PM,"","similar to health. fatigue (FP) regenerates faster than health (HP). blunt weapons inflict most fatigue damage, axes also damage fatigue much, swords - not much and daggers - almost none. when monster fatigue drops to zero or less, it loses consciousness (that means it does not get energy points). also fatigue is used for running and other hard actions."
+193,New,rubyrogue,Feature,Normal,implement recipes for crafting items,Laurynas Liutkus,"","",Laurynas Liutkus,"","",0,"",07/13/2008 09:57 PM,07/13/2008 09:57 PM,"","examples:
+  use woodcraft skill to create spiked club from club and metal spikes
+  use explosives skill to create Molotov cocktail from empty bottle, rag and some gasoline (or other flammable liquid)"
+192,New,rubyrogue,Feature,Normal,generate monsters depending on map danger level,Laurynas Liutkus,"","",Laurynas Liutkus,07/13/2008,"",0,"",07/13/2008 09:53 PM,07/13/2008 09:53 PM,"",this also means implementing map danger level
+191,New,rubyrogue,Feature,Normal,create infinite depth dungeon,Laurynas Liutkus,"","",Laurynas Liutkus,07/13/2008,"",0,"",07/13/2008 09:53 PM,07/13/2008 09:53 PM,"","as player goes deeper infinitely, maps are generated, but preserved"
+190,New,rubyrogue,Feature,Normal,implement dungeon descriptor structure,Laurynas Liutkus,"","",Laurynas Liutkus,"","",0,"",07/13/2008 09:52 PM,07/13/2008 09:52 PM,"","it will specify dungeon branches. that means, how branches are connected. for example:
+  at 5th level of ogre cave there is stair to 1st level of dragons nest
+  ogre cave's depth is 15
+  at 15th level of ogre cave there is a one-way portal to hell..."
+189,New,rubyrogue,Feature,Normal,randomly generate map,Laurynas Liutkus,"","",Laurynas Liutkus,"","",0,"",07/13/2008 09:41 PM,07/13/2008 09:41 PM,"","create rooms, corridors, items, monsters. possibly stairs"
+188,Closed,rubyrogue,Feature,Normal,player can equip launcher and shoot ammunition using it,Laurynas Liutkus,"","",Laurynas Liutkus,"","",100,"",07/13/2008 09:38 PM,08/17/2008 03:05 AM,"","player cannot shoot ammunition using wrong launcher. for example, he cannot shoot bullets using bow"
+187,Closed,rubyrogue,Feature,Normal,"when player clicks nonempty item slot, unequip item from it",Laurynas Liutkus,"","",Laurynas Liutkus,07/13/2008,"",100,"",07/13/2008 09:36 PM,07/25/2008 11:34 PM,"",-
+186,Closed,rubyrogue,Feature,Normal,do not allow to equip item to wrong slot,Laurynas Liutkus,"","",Laurynas Liutkus,07/13/2008,"",100,"",07/13/2008 09:35 PM,08/01/2008 01:23 AM,"","first of all, filter available items. do this by implementing method to recognize whether item fits specific slot by checking presence of required item attributes to be equipped to slot."
+185,Closed,rubyrogue,Feature,Normal,implement simple ranged attack,Laurynas Liutkus,"","",Laurynas Liutkus,07/13/2008,"",100,"",07/13/2008 09:32 PM,07/29/2008 11:31 PM,"","this includes:
+
+hit/miss
+ammunition should drop on map at target location
+attacker training for hit
+
+player currently is able to target, ""shoot"" without ammunition and equip ammunition"
+184,Closed,rubyrogue,Feature,Normal,create makefile or other easy to use compilation script for fov library,Laurynas Liutkus,"","",Laurynas Liutkus,07/13/2008,"",100,"",07/13/2008 09:30 PM,07/24/2008 06:21 PM,"",-
+183,Closed,rubyrogue,Feature,Normal,monster drops all of it's items after being killed,Laurynas Liutkus,"","",Laurynas Liutkus,"","",100,"",07/13/2008 09:26 PM,07/17/2008 12:36 AM,"",-
+182,Closed,rubyrogue,Feature,Normal,player drops item by pressing 'd',Laurynas Liutkus,"","",Laurynas Liutkus,"","",0,"",07/13/2008 09:26 PM,07/15/2008 10:21 PM,"",-

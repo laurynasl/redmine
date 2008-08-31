@@ -190,4 +190,11 @@ class IssueTest < Test::Unit::TestCase
     assert_nil Issue.find_by_id(1)
     assert_nil TimeEntry.find_by_issue_id(1)
   end
+
+  def test_import_from_csv
+    filename = File.join(File.dirname(__FILE__), '..', 'fixtures', 'files', 'rubyrogue.csv')
+    Issue.import_from_csv(filename, :project_id => 1)
+    issue = Issue.find(274)
+    assert issue
+  end
 end

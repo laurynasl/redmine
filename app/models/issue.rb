@@ -260,4 +260,24 @@ class Issue < ActiveRecord::Base
   def to_s
     "#{tracker} ##{id}: #{subject}"
   end
+
+  def self.import_from_csv(filename, options)
+    data = CSV.read(filename)
+    captions = data.delete_at(0)
+    captions_map = {}
+    fields = [:description, :subject]
+    fields.each do |field|
+      captions_map[field] = captions.index(field.to_s.titleize)
+    end
+    data.each do |chunk|
+      issue = Issue.new :tracker_id => 1, :author_id => 1
+      issue.project_id = options[:project_id]
+      fields.each do |field|
+        issue.send("#{field}=", chunk[captions_map[field]])
+      end
+      issue.save!
+      issue_id = chunk.first
+      connection.execute "UPDATE issues SET id = #{issue_id} WHERE id = #{issue.id}"
+    end
+  end
 end
