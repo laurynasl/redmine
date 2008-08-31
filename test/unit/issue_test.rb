@@ -192,9 +192,24 @@ class IssueTest < Test::Unit::TestCase
   end
 
   def test_import_from_csv
+    user = User.new(:firstname => "Laurynas", :lastname => "Liutkus", :mail => "laurynasl@mailinator.com")
+    user.login = "laurynasl"
+    user.password, user.password_confirmation = "password", "password"
+    user.save!
+
     filename = File.join(File.dirname(__FILE__), '..', 'fixtures', 'files', 'rubyrogue.csv')
     Issue.import_from_csv(filename, :project_id => 1)
+
     issue = Issue.find(274)
     assert issue
+    assert_equal 'Feature', issue.tracker.name
+    assert_equal 'Laurynas Liutkus', issue.author.name
+
+    issue = Issue.find(273)
+    assert_equal 'Closed', issue.status.name
+    assert_equal 100, issue.done_ratio
+
+    issue = Issue.find(259)
+    assert_equal 'Laurynas Liutkus', issue.assigned_to.name
   end
 end

@@ -264,17 +264,47 @@ class Issue < ActiveRecord::Base
   def self.import_from_csv(filename, options)
     data = CSV.read(filename)
     captions = data.delete_at(0)
+
     captions_map = {}
-    fields = [:description, :subject]
+    fields = [:description, :subject, :status, :tracker, :author]
     fields.each do |field|
       captions_map[field] = captions.index(field.to_s.titleize)
     end
+    captions_map[:assigned_to] = captions.index('Assigned to')
+    captions_map[:done_ratio] = captions.index('% Done')
+    simple_fields = [:description, :subject, :done_ratio]
+
+    project = Project.find(options[:project_id])
+
     data.each do |chunk|
       issue = Issue.new :tracker_id => 1, :author_id => 1
-      issue.project_id = options[:project_id]
-      fields.each do |field|
+      issue.project_id = project.id
+
+      simple_fields.each do |field|
         issue.send("#{field}=", chunk[captions_map[field]])
       end
+      
+      # status
+      issue.status = IssueStatus.find_by_name(chunk[captions_map[:status]])
+
+      # tracker
+      unless  tracker = Tracker.find_by_name(chunk[captions_map[:tracker]])
+        tracker = Tracker.new :name => chunk[captions_map[:tracker]]
+        tracker.save!
+        project.trackers << tracker
+      end
+      issue.tracker_id = tracker.id
+
+      # author
+      firstname, lastname = chunk[captions_map[:author]].split(' ')
+      firstname, lastname = '', firstname if lastname.nil?
+      issue.author = User.find_by_firstname_and_lastname(firstname, lastname)
+
+      # assigned_to
+      firstname, lastname = chunk[captions_map[:assigned_to]].split(' ')
+      issue.assigned_to = User.find_by_firstname_and_lastname(firstname, lastname)
+
+
       issue.save!
       issue_id = chunk.first
       connection.execute "UPDATE issues SET id = #{issue_id} WHERE id = #{issue.id}"
