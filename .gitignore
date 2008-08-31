@@ -1,0 +1,9 @@
+config/database.yml
+db/schema.rb
+files/080831225109_Paella.jpg
+files/080831225202_Paella.jpg
+log/development.log
+log/production.log
+log/test.log
+public/plugin_assets
+tmp
