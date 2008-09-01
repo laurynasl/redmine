@@ -198,12 +198,13 @@ class IssueTest < Test::Unit::TestCase
     user.save!
 
     filename = File.join(File.dirname(__FILE__), '..', 'fixtures', 'files', 'rubyrogue.csv')
-    Issue.import_from_csv(filename, :project_id => 1)
+    Issue.import_from_csv(filename, :project => 'onlinestore')
 
     issue = Issue.find(274)
     assert issue
     assert_equal 'Feature', issue.tracker.name
     assert_equal 'Laurynas Liutkus', issue.author.name
+    assert_equal 2, issue.project.id
 
     issue = Issue.find(273)
     assert_equal 'Closed', issue.status.name
@@ -211,5 +212,9 @@ class IssueTest < Test::Unit::TestCase
 
     issue = Issue.find(259)
     assert_equal 'Laurynas Liutkus', issue.assigned_to.name
+
+    new_issue = Issue.new :project_id => 1, :tracker_id => 1, :author_id => 1, :description => 'last', :subject => 'last'
+    new_issue.save!
+    assert_equal 275, new_issue.id
   end
 end
