@@ -209,6 +209,8 @@ class IssueTest < Test::Unit::TestCase
     issue = Issue.find(273)
     assert_equal 'Closed', issue.status.name
     assert_equal 100, issue.done_ratio
+    assert_equal '2008-07-30 23:34', issue.created_on.strftime('%Y-%m-%d %H:%M')
+    assert_equal '2008-07-30 23:44', issue.updated_on.strftime('%Y-%m-%d %H:%M')
 
     issue = Issue.find(259)
     assert_equal 'Laurynas Liutkus', issue.assigned_to.name

@@ -262,6 +262,7 @@ class Issue < ActiveRecord::Base
   end
 
   def self.import_from_csv(filename, options)
+    self.record_timestamps = false
     transaction do
       data = CSV.read(filename)
       captions = data.delete_at(0)
@@ -273,7 +274,9 @@ class Issue < ActiveRecord::Base
       end
       captions_map[:assigned_to] = captions.index('Assigned to')
       captions_map[:done_ratio] = captions.index('% Done')
-      simple_fields = [:description, :subject, :done_ratio]
+      captions_map[:created_on] = captions.index('Created')
+      captions_map[:updated_on] = captions.index('Updated')
+      simple_fields = [:description, :subject, :done_ratio, :created_on, :updated_on]
 
       project = Project.find_by_identifier(options[:project]) || raise("project '#{options[:project]} does not exist!")
 
@@ -312,5 +315,7 @@ class Issue < ActiveRecord::Base
       end
       connection.execute "ALTER TABLE issues AUTO_INCREMENT = 0"
     end
+  ensure
+    self.record_timestamps = true
   end
 end
